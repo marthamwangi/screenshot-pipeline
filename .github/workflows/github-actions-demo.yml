@@ -1,7 +1,7 @@
-name: GitHub Actions Demo
+name: screnshot-pipeline Actions
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+  track-homepage-changes:
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
@@ -14,4 +14,8 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - uses: actions/setup-node@v3
+        with: 
+          node-version: '16'
+      - run: npm install -g bats
+      - run: bats -v
