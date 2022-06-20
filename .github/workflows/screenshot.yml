@@ -2,17 +2,17 @@ name: screenshot-homepage-changes
 on: [push]
 jobs:
   Screenshot-on-homepage-changes
-  runs-on: ubuntu-latest
-  steps:
-    - run: echo "Job triggered by ${{github.event_name}} event."
-    - name: Checkout repository code
-    - run: actions/checkout@v3
-    - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-    - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-    - name: List files in the repository
-    - run: |
-        ls ${{github.workspace}}
-    - run: echo "This job's status is ${{job.status}}"
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Job triggered by ${{github.event_name}} event."
+      - name: Checkout repository code
+      - run: actions/checkout@v3
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: List files in the repository
+      - run: |
+          ls ${{github.workspace}}
+      - run: echo "This job's status is ${{job.status}}"
     
 
     
