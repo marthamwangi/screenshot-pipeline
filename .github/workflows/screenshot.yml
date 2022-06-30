@@ -25,7 +25,11 @@ jobs:
         with:
           node-version: "16.5.x"
           cache: "npm"
-      - run: npm ci
+
+      - name: Install Dependencies
+      - run: |
+          cd screenshot-pipeline
+          npm ci
 
       - name: Build the app
         run: |
