@@ -30,7 +30,7 @@ jobs:
       - name: Build the app
         run: |
           cd screenshot-pipeline
-          npm run build
+          npm run build --if-present
 
       - name: Run component tests
         run: |
