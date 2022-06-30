@@ -28,21 +28,21 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          cd screenshot-pipeline
+          cd screenshot-pipeline/screenshot-pipeline
           npm ci
 
       - name: Build the app
         run: |
-          cd screenshot-pipeline
+          cd screenshot-pipeline/screenshot-pipeline
           npm run build --if-present
 
       - name: Run component tests
         run: |
-          cd screenshot-pipeline
+          cd screenshot-pipeline/screenshot-pipeline
           npm run test
 
       - name: Start the app
         run: |
-          cd screenshot-pipeline
+          cd screenshot-pipeline/screenshot-pipeline
           npm start &
           npx wait-on --timeout 60000
