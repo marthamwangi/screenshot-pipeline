@@ -1,21 +1,42 @@
 name: screenshot-homepage-changes
-on: [push]
+on:
+  push:
+    branches: [main]
+
 jobs:
   Screenshot-on-homepage-changes:
     runs-on: ubuntu-latest
     steps:
-       - run: echo "Job triggered by ${{github.event_name}} event."
-       
-       - name: Checkout repository code
-         uses: actions/checkout@v3
-       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-       - name: List files in the repository
-         run: |
+      - run: echo "Job triggered by ${{github.event_name}} event."
+
+      - name: Checkout repository code
+        uses: actions/checkout@v3
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+
+      - name: List files in the repository
+        run: |
           ls ${{github.workspace}}
-       - run: echo "This job's status is ${{job.status}}"
-       - name: Setup Node
-         uses: actions/setup-node@v3
-         with:
-            node-version: '16.5.x'
-       - run: npm install
+      - run: echo "This job's status is ${{job.status}}"
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16.5.x"
+          cache: "npm"
+      - run: npm ci
+
+      - name: Build the app
+        run: |
+          cd screenshot-pipeline
+          npm run build
+
+      - name: Run component tests
+        run: |
+          cd screenshot-pipeline
+          npm run test
+
+      - name: Start the app
+        run: |
+          cd screenshot-pipeline
+          npm start &
+          npx wait-on --timeout 60000
