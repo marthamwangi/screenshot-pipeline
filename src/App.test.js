@@ -6,3 +6,8 @@ test('renders learn react link', () => {
   const linkElement = screen.getByText(/learn react/i);
   expect(linkElement).toBeInTheDocument();
 });
+test('url navigates to google.com', () => {
+  render(<App />);
+  const linkElement = screen.getByTestId(/go-google/i);
+  expect(linkElement.href).toContain('google.com');
+})
